@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernanda — Mi piel, mi historia, mi orgullo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm: #F0E6D6;
+    --brown-light: #C8956A;
+    --brown-mid: #A0633A;
+    --brown-deep: #6B3A1F;
+    --text: #2A1A0E;
+    --muted: #8C6E58;
+    --accent: #D4845A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--brown-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,132,90,0.25) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    pointer-events: none;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,149,106,0.15) 0%, transparent 70%);
+    bottom: -60px; right: -60px;
+    pointer-events: none;
+  }
+
+  .tag-line {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 68px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--brown-light);
+  }
+
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 360px;
+    border-left: 2px solid var(--brown-light);
+    padding-left: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-right {
+    background: var(--warm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 48px;
+    position: relative;
+  }
+
+  .portrait-frame {
+    width: 280px;
+    height: 340px;
+    border-radius: 140px 140px 60px 60px;
+    background: linear-gradient(160deg, var(--brown-light), var(--brown-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+    box-shadow: 0 30px 80px rgba(107,58,31,0.3);
+  }
+
+  .portrait-initial {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .portrait-badge {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 30px;
+    white-space: nowrap;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--brown-deep);
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-role {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 100px 80px;
+    background: #fff;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    line-height: 1.15;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--warm);
+    transform: translateX(-50%);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    margin-bottom: 60px;
+    align-items: start;
+  }
+
+  .tl-item:nth-child(even) .tl-content { order: 3; }
+  .tl-item:nth-child(even) .tl-empty { order: 1; }
+
+  .tl-content {
+    padding: 24px 28px;
+    background: var(--cream);
+    border-radius: 16px;
+    border: 1px solid var(--warm);
+    position: relative;
+  }
+
+  .tl-item:nth-child(odd) .tl-content { margin-right: 20px; }
+  .tl-item:nth-child(even) .tl-content { margin-left: 20px; }
+
+  .tl-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .tl-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .tl-text {
+    font-size: 13.5px;
+    font-weight: 300;
+    color: #5A4030;
+    line-height: 1.75;
+  }
+
+  .tl-dot {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 24px;
+  }
+
+  .tl-dot-inner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 3px var(--warm);
+    flex-shrink: 0;
+  }
+
+  .tl-empty { }
+
+  /* ── QUOTE BREAK ── */
+  .quote-break {
+    background: var(--brown-deep);
+    padding: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-break::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 300px;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    top: -60px; left: 40px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .big-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-style: italic;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.45;
+    max-width: 700px;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .big-quote span { color: var(--brown-light); }
+
+  .quote-attr {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── LOGROS ── */
+  .logros-section {
+    padding: 100px 80px;
+    background: var(--cream);
+  }
+
+  .logros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .logro-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px 28px;
+    border: 1px solid var(--warm);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .logro-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(107,58,31,0.12);
+  }
+
+  .logro-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--brown-light), var(--accent));
+  }
+
+  .logro-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .logro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .logro-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── MENSAJE FINAL ── */
+  .final-section {
+    background: var(--warm);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .final-left { }
+
+  .final-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--brown-deep);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .final-title em { font-style: italic; color: var(--accent); }
+
+  .final-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: #5A4030;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .final-cta {
+    display: inline-block;
+    background: var(--brown-deep);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .final-cta:hover { background: var(--brown-mid); }
+
+  .final-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mensaje-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    border-left: 4px solid var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--brown-deep);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-deep);
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .footer-brand span { color: var(--brown-light); }
+
+  .footer-msg {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .timeline::before { left: 20px; }
+    .tl-item { grid-template-columns: 40px 1fr; }
+    .tl-item:nth-child(even) .tl-content { order: 2; margin-left: 16px; }
+    .tl-empty { display: none; }
+    .logros-grid { grid-template-columns: 1fr; }
+    .final-section { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="tag-line">Historia de superación · Discriminación racial</div>
+    <h1 class="hero-title">Mi piel,<br>mi <em>orgullo</em>,<br>mi historia</h1>
+    <p class="hero-quote">"El color de mi piel no define mis límites — define mi historia y mi fortaleza."</p>
+  </div>
+  <div class="hero-right">
+    <div class="portrait-frame">
+      <span class="portrait-initial">F</span>
+      <div class="portrait-badge">Sobreviviente · Resiliente</div>
+    </div>
+    <div class="hero-name">Fernanda Quispe</div>
+    <div class="hero-role">Activista · Estudiante · Ejemplo de vida</div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-header">
+    <span class="section-tag">Su camino</span>
+    <h2 class="section-title">De las sombras<br>a la luz propia</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-content">
+        <div class="tl-year">El inicio · 2018</div>
+        <div class="tl-heading">Los primeros comentarios hirientes</div>
+        <div class="tl-text">Fernanda tenía 14 años cuando empezaron los comentarios en el colegio. Compañeros burlaban su tono de piel morena, le ponían apodos y la excluían de grupos. Ella llegaba a casa sin querer hablar con nadie.</div>
+      </div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">El quiebre · 2019</div>
+        <div class="tl-heading">El año más difícil</div>
+        <div class="tl-text">El acoso se intensificó en redes sociales. Comentarios anónimos sobre su apariencia la llevaron a encerrarse. Su rendimiento bajó y pensó en cambiar de colegio. Fue su mamá quien notó el cambio y buscó ayuda.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-content">
+        <div class="tl-year">El giro · 2020</div>
+        <div class="tl-heading">Encontró su comunidad</div>
+        <div class="tl-text">Durante la pandemia, Fernanda descubrió comunidades en línea de jóvenes afrodescendientes e indígenas que compartían sus experiencias. Por primera vez sintió que no estaba sola y que su belleza era válida y poderosa.</div>
+      </div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">El despertar · 2021</div>
+        <div class="tl-heading">Habló por primera vez</div>
+        <div class="tl-text">Fernanda escribió su primer post público contando su experiencia. Lo que esperaba que pasara desapercibido, se convirtió en cientos de respuestas de personas que vivían lo mismo. Su voz tenía peso.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-content">
+        <div class="tl-year">La transformación · 2022</div>
+        <div class="tl-heading">Se convirtió en vocera</div>
+        <div class="tl-text">Participó en talleres escolares sobre discriminación racial. Aprendió sobre sus derechos y empezó a educar a otros. El colegio que antes la hacía sufrir, ahora la invitaba a dar charlas a los nuevos estudiantes.</div>
+      </div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+      <div class="tl-content">
+        <div class="tl-year">Hoy · 2024</div>
+        <div class="tl-heading">Fernanda, empoderada</div>
+        <div class="tl-text">Estudia Comunicaciones con especialización en derechos humanos. Lleva su historia a colegios, universidades y plataformas digitales. Usa su experiencia como herramienta de cambio social.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-break">
+  <p class="big-quote">"Me enseñaron a tener vergüenza de mi piel. Yo elegí aprender a <span>amarla con orgullo</span> — y esa fue la decisión más poderosa de mi vida."</p>
+  <div class="quote-attr">— Fernanda Quispe, 2024</div>
+</section>
+
+<!-- LOGROS -->
+<section class="logros-section">
+  <div class="section-header">
+    <span class="section-tag">Sus logros</span>
+    <h2 class="section-title">Lo que construyó<br>desde el dolor</h2>
+  </div>
+
+  <div class="logros-grid">
+    <div class="logro-card">
+      <span class="logro-icon">🎤</span>
+      <div class="logro-title">Vocera en 12 colegios</div>
+      <div class="logro-text">Ha dado charlas sobre discriminación racial e identidad en más de doce instituciones educativas de Lima y provincias.</div>
+    </div>
+    <div class="logro-card">
+      <span class="logro-icon">📝</span>
+      <div class="logro-title">Escritora de su propia historia</div>
+      <div class="logro-text">Publicó su testimonio en una revista universitaria de derechos humanos que llegó a miles de lectores en Latinoamérica.</div>
+    </div>
+    <div class="logro-card">
+      <span class="logro-icon">🤝</span>
+      <div class="logro-title">Fundó un grupo de apoyo</div>
+      <div class="logro-text">Creó una comunidad virtual donde jóvenes que viven discriminación racial pueden compartir sus experiencias y apoyarse mutuamente.</div>
+    </div>
+    <div class="logro-card">
+      <span class="logro-icon">🏆</span>
+      <div class="logro-title">Reconocimiento estudiantil</div>
+      <div class="logro-text">Recibió un reconocimiento de su universidad por su labor en la promoción de la igualdad y la diversidad cultural.</div>
+    </div>
+    <div class="logro-card">
+      <span class="logro-icon">💛</span>
+      <div class="logro-title">Referente para cientos</div>
+      <div class="logro-text">Jóvenes de todo el país le escriben diciéndole que su historia les dio el valor de denunciar el acoso que vivían en silencio.</div>
+    </div>
+    <div class="logro-card">
+      <span class="logro-icon">🌿</span>
+      <div class="logro-title">Paz consigo misma</div>
+      <div class="logro-text">El mayor logro de Fernanda es haberse reconciliado con su identidad y llevar su historia sin vergüenza, sino con dignidad.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENSAJE FINAL -->
+<section class="final-section">
+  <div class="final-left">
+    <h2 class="final-title">Tu piel no es<br>un <em>defecto</em> —<br>es tu historia</h2>
+    <p class="final-text">La discriminación racial duele. Pero como Fernanda nos demuestra, no define el destino de nadie. Cada tono de piel carga siglos de historia, resistencia y belleza. Nadie tiene el derecho de hacerte sentir menos por eso.</p>
+    <p class="final-text">Si estás viviendo una situación similar a la de Fernanda, habla. No estás solo. Tu voz importa y tu experiencia merece ser escuchada.</p>
+    <a class="final-cta" href="#">Comparte tu historia</a>
+  </div>
+  <div class="final-right">
+    <div class="mensaje-card">"La primera vez que dije 'soy bonita' sin creerlo del todo, fue el inicio de creerlo de verdad."</div>
+    <div class="mensaje-card">"No cambié para que me aceptaran. Aprendí que yo ya era suficiente desde antes."</div>
+    <div class="mensaje-card">"El acoso quiso apagar mi luz. Hoy esa misma luz ilumina a otras personas que la necesitan."</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Fernanda <span>Quispe</span></div>
+  <div class="footer-msg">Mi piel, mi historia, mi orgullo · 2024</div>
+</footer>
+
+</body>
+</html>
